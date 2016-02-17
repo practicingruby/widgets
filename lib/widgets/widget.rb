@@ -19,7 +19,8 @@ module Widgets
     end
 
     def color
-      { Ray::Color.cyan => :blue }[@color]
+      { Ray::Color.cyan => :blue,
+        Ray::Color.red  => :red }[@color]
     end
 
     def draw_on(win)
