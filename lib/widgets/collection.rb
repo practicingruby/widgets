@@ -15,5 +15,9 @@ module Widgets
     def count
       all.size
     end
+
+    def delete_all
+      all.clear
+    end
   end
 end
