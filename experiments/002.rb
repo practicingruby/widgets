@@ -18,7 +18,7 @@ Ray::Game.new("Experiment #002", :size => [1024,768]) do
 
       if colors[:red].size > 0 && colors[:blue].size > 0
         sleep 1
-
+  
         Widget.delete(colors[:red].first)
         Widget.delete(colors[:blue].first)
         Widget.create(:color  => Ray::Color.new(160,32,240),
