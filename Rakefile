@@ -1,3 +1,3 @@
 task :default do
-  ruby "experiments/004.rb"
+  ruby "experiments/006.rb"
 end
