@@ -2,10 +2,14 @@ require_relative "../lib/widgets"
 
 include Widgets
 
-Ray::Game.new("Experiment #003", :size => [1024,768]) do
+Ray::Game.new("Experiment #004", :size => [1024,768]) do
   Machine.create(:pos     => [1024/2.0, 768/2.0],
                  :color   => Ray::Color.new(150,150,150),
                  :radius  => 100)
+
+  
+  Drone.create(:start_pos => [300,300],
+               :finish_pos => [550,400])
   
   register do
     add_hook :quit, method(:exit!)
@@ -13,8 +17,9 @@ Ray::Game.new("Experiment #003", :size => [1024,768]) do
 
   scene :factory do
     render do |win|
-      Machine.all.each { |e| e.draw_on(win) }
-      Widget.all.each { |e| e.draw_on(win)  }
+      Machine.each { |e| e.draw_on(win) }
+      Drone.each { |e| e.draw_on(win) }
+      Widget.each { |e| e.draw_on(win)  }
     end
 
     always do

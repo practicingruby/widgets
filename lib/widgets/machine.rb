@@ -8,6 +8,9 @@ module Widgets
       @shape      = Ray::Polygon.circle([0,0], radius, color)
       @shape.pos  = pos
 
+      @output     = Ray::Polygon.circle([0,0], radius/2, Ray::Color.new(200,175,200))
+      @output.pos  = [@shape.pos.x, @shape.pos.y+radius]
+
       @activation_time = nil
     end
 
@@ -17,6 +20,7 @@ module Widgets
 
     def draw_on(win)
       win.draw(@shape)
+      win.draw(@output)
 
       operate
     end
@@ -50,7 +54,7 @@ module Widgets
       Widget.delete(blue)
 
       Widget.create(:color  => Ray::Color.new(160,32,240),
-                    :pos    => [@shape.pos.x + rand(-80..80), @shape.pos.y + rand(-80..80)],
+                    :pos    => [@output.pos.x + rand(-30..30), @output.pos.y + rand(-30..30)],
                     :radius => 5)
 
       @activation_time = nil

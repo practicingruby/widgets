@@ -1,7 +1,13 @@
 module Widgets
   module Collection
+    include Enumerable
+    
     def all
       @elements ||= []
+    end
+
+    def each(&block)
+      all.each(&block)
     end
 
     def create(params)
