@@ -10,6 +10,8 @@ Ray::Game.new("Experiment #004", :size => [1024,768]) do
   
   Drone.create(:start_pos => [300,300],
                :finish_pos => [550,400])
+
+  Drone.each(&:toggle)
   
   register do
     add_hook :quit, method(:exit!)
