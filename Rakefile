@@ -4,6 +4,6 @@ end
 
 task :x, [:num] do |t, params|
   sh "git checkout #{params[:num]}"
-  ruby "experiments/#{num}.rb"
+  ruby "experiments/#{params[:num]}.rb"
   sh "git checkout master"
 end
