@@ -55,8 +55,6 @@ module Widgets
     end
 
     def operate
-      return unless @status == :running
-
       dest = @destination.peek
 
       dx = dest.x - @shape.pos.x
@@ -64,15 +62,7 @@ module Widgets
 
       d = Math.hypot(dx,dy)
 
-      if d < 5
-        @destination.next
-      else
-        steps = d/3
-        @shape.pos += [dx/steps, dy/steps]
-      end
-
       if dest == @finish
-
         @widget ||= Widget.find { |w|
           idx = w.pos.x - @shape.pos.x
           idy = w.pos.y - @shape.pos.y
@@ -80,9 +70,22 @@ module Widgets
           Math.hypot(idx, idy) < 10
         }
 
-        @widget.move_to(@shape.pos) if @widget
+        if @widget
+          @widget.move_to(@shape.pos) 
+          @status = :running
+        end
       else
         @widget = nil
+      end
+
+      return unless @status == :running
+
+      if d < 5
+        @destination.next
+        @status = :stopped if @destination.peek == @finish
+      else
+        steps = d/4
+        @shape.pos += [dx/steps, dy/steps]
       end
     end
 

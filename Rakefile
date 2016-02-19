@@ -1,5 +1,5 @@
 task :default do
-  ruby "experiments/006.rb"
+  ruby "experiments/007.rb"
 end
 
 task :x, [:num] do |t, params|
