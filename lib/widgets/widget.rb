@@ -9,6 +9,8 @@ module Widgets
       @shape      = Ray::Polygon.circle([0,0], radius, color)
       @shape.pos  = pos
     end
+    
+    attr_reader :radius
 
     def pos
       @shape.pos

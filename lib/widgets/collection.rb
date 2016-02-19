@@ -25,5 +25,9 @@ module Widgets
     def delete_all
       all.clear
     end
+
+    def draw_all(win)
+      each { |e| e.draw_on(win) }
+    end
   end
 end

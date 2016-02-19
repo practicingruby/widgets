@@ -15,10 +15,9 @@ Ray::Game.new("Experiment #006", :size => [1024,768]) do
   Drone.create(:start_pos => [550,200],
                :finish_pos => [550,200])
 
-  100.times do
-    Widget.create(:pos => [rand(150..350), rand(150..300)], :color => Ray::Color.red, :radius => 4)
-    Widget.create(:pos => [rand(700..900), rand(150..300)], :color => Ray::Color.cyan, :radius => 4)
-  end
+  Conveyor.create(:pos => [0,100], :length => 200, :height => 50)
+
+  Conveyor.create(:pos => [0,200], :length => 200, :height => 50)
 
   register do
     add_hook :quit, method(:exit!)
@@ -26,13 +25,20 @@ Ray::Game.new("Experiment #006", :size => [1024,768]) do
 
   scene :factory do
     render do |win|
-      Machine.each { |e| e.draw_on(win) }
-      Drone.each { |e| e.draw_on(win) }
-      Widget.each { |e| e.draw_on(win)  }
+      Conveyor.draw_all(win)
+      Machine.draw_all(win)
+      Drone.draw_all(win)
+      Widget.draw_all(win)
     end
 
     always do
-      # do nothing
+      if Widget.none? { |e| e.color == :blue }
+        Widget.create(:pos => [0,125], :radius => 4, :color => Ray::Color.cyan)
+      end
+
+      if Widget.none? { |e| e.color == :red }
+        Widget.create(:pos => [0,225], :radius => 4, :color => Ray::Color.red)
+      end  
     end
       
 
