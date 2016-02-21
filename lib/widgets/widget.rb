@@ -1,7 +1,6 @@
 module Widgets
   class Widget
     extend Collection
-
     def initialize(radius:, color:, pos:)
       @radius     = radius
       @color      = color

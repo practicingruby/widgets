@@ -16,17 +16,23 @@ class Focus
   end
 
   def self.select(object)
+    return unless Widgets.paused?
+
     @object = object
     @object.focus
   end
 
   def self.blur
+    return unless Widgets.paused?
+
     @object.blur
 
     select(NullObject)
   end
 
   def self.click(pos)
+    return unless Widgets.paused?
+
     activated.click(pos)
   end
 end
