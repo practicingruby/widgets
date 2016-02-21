@@ -2,11 +2,12 @@ module Widgets
   class Drone
     extend Collection
 
-    def initialize(start_pos:, finish_pos:)
+    def initialize(start_pos:, finish_pos:, speed: 4)
       @radius = 8
       @start  = Ray::Vector2[*start_pos]
       @finish = Ray::Vector2[*finish_pos]
       @shape  = Ray::Polygon.circle([0,0],@radius, Ray::Color.yellow)
+      @speed  = speed
       @shape.pos = @start
       @destination = [@finish, @start].cycle
       @widget      = nil
@@ -35,19 +36,14 @@ module Widgets
 
         @status = :stopped
 
-        @start = nil
+        @start = @shape.pos
         @finish = nil
       end
     end
 
     def click(pos)
-      if @start.nil?
-        @start = pos
-        @shape.pos = @start
-      else
-        @finish = pos
-        Focus.blur
-      end
+      @finish = pos
+      Focus.blur
     end
 
     def toggle
@@ -92,7 +88,7 @@ module Widgets
         @destination.next
         @status = :stopped if @destination.peek == @finish
       else
-        steps = d/4
+        steps = d/@speed
         @shape.pos += [dx/steps, dy/steps]
       end
     end
