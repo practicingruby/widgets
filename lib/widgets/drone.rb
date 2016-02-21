@@ -54,6 +54,14 @@ module Widgets
       @status = { :running => :stopped, :stopped => :running }[@status]
     end
 
+    def run
+      @status = :running
+    end
+
+    def stop
+      @status = :stopped
+    end
+
     def operate
       dest = @destination.peek
 

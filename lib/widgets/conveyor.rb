@@ -2,10 +2,10 @@ module Widgets
   class Conveyor
     extend Collection
 
-    def initialize(length:, height:, pos:)
+    def initialize(length:, width:, pos:)
       @length     = length
-      @height     = height
-      @shape      = Ray::Polygon.rectangle([0, 0, length, height], Ray::Color.gray)
+      @width     = width
+      @shape      = Ray::Polygon.rectangle([0, 0, length, width], Ray::Color.gray)
       @shape.pos  = pos
     end
 
@@ -19,9 +19,14 @@ module Widgets
       operate
     end
 
+    def empty?
+      widgets = Widget.select { |e| [@shape.pos.x, @shape.pos.y, @length+10, @width].to_rect.collide?([e.pos.x-e.radius, e.pos.y-e.radius, e.radius*2, e.radius*2].to_rect) }
+      widgets.empty?
+    end
+
     def operate
-      widgets = Widget.select { |e| [@shape.pos.x, @shape.pos.y, @length+10, @height].to_rect.collide?([e.pos.x-e.radius, e.pos.y-e.radius, e.radius*2, e.radius*2].to_rect) }
-      widgets.each { |w| w.move_to([w.pos.x+1, w.pos.y])}
+      widgets = Widget.select { |e| [@shape.pos.x, @shape.pos.y, @length+10, @width].to_rect.collide?([e.pos.x-e.radius, e.pos.y-e.radius, e.radius*2, e.radius*2].to_rect) }
+      widgets.each { |w| w.move_to([w.pos.x+2, w.pos.y])}
     end
   end
 end
