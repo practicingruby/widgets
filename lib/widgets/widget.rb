@@ -9,7 +9,7 @@ module Widgets
       @shape.pos  = pos
     end
     
-    attr_reader :radius
+    attr_reader :radius, :color
 
     def pos
       @shape.pos
@@ -19,7 +19,7 @@ module Widgets
       @shape.pos = pos
     end
 
-    def color
+    def color_name
       { Ray::Color.cyan => :blue,
         Ray::Color.red  => :red }[@color]
     end

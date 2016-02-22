@@ -28,7 +28,7 @@ module Widgets
     def operate
       widgets = Widget.all.select { |e| e.pos.distance(@shape.pos) < @radius }
 
-      by_color = widgets.group_by { |e| e.color }
+      by_color = widgets.group_by { |e| e.color_name }
       by_color.default = []
 
       red   = by_color[:red].first
@@ -44,7 +44,7 @@ module Widgets
     def activate
       widgets = Widget.all.select { |e| e.pos.distance(@shape.pos) < @radius }
 
-      by_color = widgets.group_by { |e| e.color }
+      by_color = widgets.group_by { |e| e.color_name }
       by_color.default = []
 
       red   = by_color[:red].first
@@ -54,7 +54,7 @@ module Widgets
       Widget.delete(blue)
 
       Widget.create(:color  => Ray::Color.new(160,32,240),
-                    :pos    => [@output.pos.x + rand(-30..30), @output.pos.y + rand(-30..30)],
+                    :pos    => [@output.pos.x, @output.pos.y],
                     :radius => 5)
 
       @activation_time = nil

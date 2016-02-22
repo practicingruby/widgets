@@ -12,18 +12,18 @@ require_relative "widgets/plate"
 
 module Widgets
   def self.pause
-    @running = false
+    @paused = true
   end
 
   def self.paused?
-    !@running
+    @paused
   end
 
   def self.run
-    @running = true
+    @paused = false
   end
 
   def self.toggle_pause
-    @running = !@running
+    @paused = !@paused
   end
 end

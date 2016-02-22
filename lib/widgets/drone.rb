@@ -120,6 +120,7 @@ module Widgets
         @finish  = nil
         @destinations = [@drone.shape.pos, @drone.shape.pos].cycle
         @repositioning = true
+        @stopped       = false
       end
 
       def focus
@@ -159,17 +160,24 @@ module Widgets
           }
 
           if @widget
-            @widget.move_to(@drone.shape.pos) 
+            @widget.move_to(@drone.shape.pos)
           end
         else
           @widget = nil
         end
 
-        if d < 5
+        @stopped = (dest == @finish && @widget.nil?)
+
+        if @stopped
+          @drone.destination = @drone.shape.pos
+        elsif d < 5
           @drone.destination = @destinations.next
           @repositioning = false
+        else
+          @drone.destination = @destinations.peek
         end
     
+
       end
 
       def draw_on(win)
