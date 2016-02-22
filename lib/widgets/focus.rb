@@ -1,6 +1,6 @@
 class Focus
   class NullObject
-    def self.click(pos)
+    def self.click(button, pos)
       # no-op
     end
 
@@ -9,6 +9,14 @@ class Focus
     
     def self.blur
     end
+  end
+
+  def self.shift
+    @shift
+  end
+
+  def self.shift=(state)
+    @shift = state
   end
 
   def self.activated
@@ -30,9 +38,9 @@ class Focus
     select(NullObject)
   end
 
-  def self.click(pos)
+  def self.click(button, pos)
     return unless Widgets.paused?
 
-    activated.click(pos)
+    activated.click(button, pos)
   end
 end
