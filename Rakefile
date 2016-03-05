@@ -1,6 +1,6 @@
 task :default do
   loop do
-    ruby "experiments/015.rb"
+    ruby "experiments/015.rb" rescue nil
   end 
 end
 
