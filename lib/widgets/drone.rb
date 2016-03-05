@@ -2,8 +2,8 @@ module Widgets
   class Drone
     extend Collection
 
-    def initialize(pos:, speed: 4)
-      @radius       = 8
+    def initialize(pos:, speed: 4, radius: 8)
+      @radius       = radius
       @shape        = Ray::Polygon.circle([0,0],@radius, Ray::Color.yellow)
       @speed        = speed
       @shape.pos    = pos
