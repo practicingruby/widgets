@@ -1,5 +1,7 @@
 module Widgets
   class Machine
+    SOUND = Ray::Sound.new("click.wav")
+
     extend Collection
 
     def initialize(radius:, color:, pos:)
@@ -38,6 +40,7 @@ module Widgets
         activate if @activation_time < Time.now
       elsif red && blue
         @activation_time = Time.now + 0.5
+        SOUND.play
       end
     end
 
@@ -55,7 +58,8 @@ module Widgets
 
       Widget.create(:color  => Ray::Color.new(160,32,240),
                     :pos    => [@output.pos.x, @output.pos.y],
-                    :radius => 5)
+                    :radius => 8)
+
 
       @activation_time = nil
     end

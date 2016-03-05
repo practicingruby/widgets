@@ -1,5 +1,7 @@
 task :default do
-  ruby "experiments/014.rb"
+  loop do
+    ruby "experiments/015.rb"
+  end 
 end
 
 task :x, [:num] do |t, params|
